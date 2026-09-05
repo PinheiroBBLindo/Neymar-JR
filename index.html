@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Neymar Jr. | A História de um Craque</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070707;
+            color: white;
+        }
+
+        /* MENU */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid #222;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #00a651;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00d26a;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 8% 60px;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 75% 50%, rgba(0, 166, 81, 0.22), transparent 35%),
+                linear-gradient(120deg, #050505, #101010);
+        }
+
+        .hero-content {
+            width: 55%;
+            z-index: 2;
+        }
+
+        .hero small {
+            color: #00d26a;
+            font-size: 15px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(60px, 10vw, 130px);
+            line-height: 0.9;
+            margin: 20px 0;
+            letter-spacing: -6px;
+        }
+
+        .hero h1 span {
+            color: #00d26a;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: #aaa;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #00a651;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #00d26a;
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            border: 1px solid #555;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            border-color: #00d26a;
+            color: #00d26a;
+        }
+
+        /* FOTO */
+
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            bottom: 0;
+            width: 42%;
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            display: block;
+
+            mask-image: linear-gradient(
+                to bottom,
+                black 70%,
+                transparent 100%
+            );
+        }
+
+        /* SEÇÕES */
+
+        section {
+            padding: 100px 8%;
+        }
+
+        .section-title {
+            margin-bottom: 60px;
+        }
+
+        .section-title small {
+            color: #00d26a;
+            letter-spacing: 3px;
+        }
+
+        .section-title h2 {
+            font-size: 50px;
+            margin-top: 10px;
+        }
+
+        .section-title p {
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* SOBRE */
+
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat {
+            background: #111;
+            border: 1px solid #222;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .stat h3 {
+            font-size: 40px;
+            color: #00d26a;
+        }
+
+        .stat p {
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* LINHA DO TEMPO */
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: #00a651;
+        }
+
+        .timeline-item {
+            width: 50%;
+            padding: 20px 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 30px;
+            width: 18px;
+            height: 18px;
+            background: #00d26a;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #00d26a;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -9px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -9px;
+        }
+        
+        .timeline-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: block;
+        }
+
+        .timeline-card {
+            background: #111;
+            border: 1px solid #222;
+            padding: 25px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-5px);
+            border-color: #00a651;
+        }
+
+        .timeline-card span {
+            color: #00d26a;
+            font-weight: bold;
+        }
+
+        .timeline-card h3 {
+            font-size: 27px;
+            margin: 10px 0;
+        }
+
+        .timeline-card p {
+            color: #999;
+            line-height: 1.6;
+        }
+
+        /* CLUBES */
+
+        .clubs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .club {
+            min-height: 180px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transition: 0.3s;
+        }
+
+        .club:hover {
+            transform: translateY(-8px);
+            border-color: #00a651;
+        }
+
+        .club-number {
+            font-size: 50px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .club h3 {
+            font-size: 22px;
+        }
+
+        .club p {
+            color: #777;
+            margin-top: 5px;
+        }
+
+        /* TÍTULOS */
+
+        .trophies {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .trophy {
+            background: linear-gradient(145deg, #151515, #0c0c0c);
+            border: 1px solid #222;
+            padding: 30px;
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        .trophy:hover {
+            transform: translateY(-7px);
+            border-color: #00a651;
+        }
+
+        .trophy-icon {
+            font-size: 40px;
+        }
+
+        .trophy h3 {
+            margin: 15px 0 8px;
+        }
+
+        .trophy p {
+            color: #888;
+            line-height: 1.5;
+        }
+
+        /* FRASE */
+
+        .quote {
+            text-align: center;
+            padding: 120px 10%;
+            background:
+                linear-gradient(
+                    rgba(0, 166, 81, 0.08),
+                    rgba(0, 0, 0, 0)
+                );
+        }
+
+        .quote h2 {
+            font-size: clamp(30px, 5vw, 60px);
+            line-height: 1.2;
+        }
+
+        .quote span {
+            color: #00d26a;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid #222;
+            padding: 30px 8%;
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 900px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 140px;
+            }
+
+            .hero-content {
+                width: 100%;
+            }
+
+            .hero-image {
+                position: relative;
+                right: auto;
+                width: 100%;
+                margin-top: 40px;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .clubs {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .trophies {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 40px;
+                padding-right: 0;
+            }
+
+            .timeline-item .timeline-dot {
+                left: 1px !important;
+                right: auto !important;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .hero h1 {
+                font-size: 65px;
+            }
+
+            section {
+                padding: 70px 5%;
+            }
+
+            .clubs {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- MENU -->
+
+    <nav>
+        <div class="logo">NEY<span>MAR</span> JR.</div>
+
+        <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#historia">História</a></li>
+            <li><a href="#carreira">Carreira</a></li>
+            <li><a href="#titulos">Títulos</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <header class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <small>Uma história escrita com talento</small>
+
+            <h1>
+                NEYMAR<br>
+                <span>JR.</span>
+            </h1>
+
+            <p>
+                Da Vila Belmiro aos maiores palcos do futebol mundial.
+                Conheça a trajetória de um dos jogadores brasileiros
+                mais marcantes de sua geração.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#historia" class="btn btn-primary">
+                    Conhecer a história
+                </a>
+
+                <a href="#carreira" class="btn btn-secondary">
+                    Ver carreira
+                </a>
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+            <img src="neymar.jpg" alt="Neymar Jr.">
+        </div>
+
+    </header>
+
+
+    <!-- HISTÓRIA -->
+
+    <section id="historia">
+
+        <div class="section-title">
+            <small>A TRAJETÓRIA</small>
+            <h2>Do menino ao craque</h2>
+            <p>Uma carreira marcada por talento, títulos e grandes momentos.</p>
+        </div>
+
+        <div class="about">
+
+            <div class="about-text">
+
+                <p>
+                    Neymar da Silva Santos Júnior nasceu em 5 de fevereiro
+                    de 1992, em Mogi das Cruzes, São Paulo.
+                </p>
+
+                <p>
+                    Desde jovem, demonstrou talento para o futebol e chegou
+                    às categorias de base do Santos. Aos 17 anos, estreou
+                    profissionalmente e rapidamente se tornou uma das maiores
+                    promessas do futebol brasileiro.
+                </p>
+
+                <p>
+                    Seu estilo de jogo baseado em dribles, velocidade,
+                    criatividade e gols fez com que conquistasse fãs
+                    no Brasil e no mundo.
+                </p>
+
+            </div>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <h3>1992</h3>
+                    <p>Ano de nascimento</p>
+                </div>
+
+                <div class="stat">
+                    <h3>10</h3>
+                    <p>Camisa marcante na Seleção</p>
+                </div>
+
+                <div class="stat">
+                    <h3>5</h3>
+                    <p>Grandes clubes na carreira</p>
+                </div>
+
+                <div class="stat">
+                    <h3>1</h3>
+                    <p>Medalha de ouro olímpica</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LINHA DO TEMPO -->
+
+    <section id="carreira">
+
+        <div class="section-title">
+            <small>LINHA DO TEMPO</small>
+            <h2>Uma carreira mundial</h2>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-card">
+
+                    <span>2009 — 2013</span>
+
+                    <img src="santos.jpg" alt="Neymar no Santos" class="timeline-image">
+
+                    <h3>Santos ⚪⚫</h3>
+
+                    <p>
+                        Neymar surgiu para o futebol profissional no Santos.
+                        Conquistou títulos importantes e virou uma das maiores
+                        estrelas do futebol brasileiro.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-card">
+
+                    <span>2013 — 2017</span>
+
+                    <img src="barcelona.jpg" alt="Neymar no Barcelona" class="timeline-image">
+
+                    <h3>Barcelona 🔵🔴</h3>
+
+                    <p>
+                        Na Espanha, Neymar formou o famoso trio MSN com
+                        Lionel Messi e Luis Suárez. Em 2015, conquistou
+                        a UEFA Champions League.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-card">
+
+                    <span>2017 — 2023</span>
+
+                    <img src="psg.jpg" alt="Neymar no PSG" class="timeline-image">
+
+                    <h3>Paris Saint-Germain 🔵🔴</h3>
+
+                    <p>
+                        Neymar chegou ao PSG em uma transferência histórica.
+                        No clube francês, conquistou diversos títulos nacionais
+                        e chegou à final da Champions League em 2020.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-card">
+
+                    <span>2023 — 2025</span>
+
+                    <img src="alhilal.jpg" alt="Neymar no Al-Hilal" class="timeline-image">
+
+                    <h3>Al-Hilal 🔵</h3>
+
+                    <p>
+                        Neymar iniciou uma nova etapa de sua carreira na
+                        Arábia Saudita defendendo o Al-Hilal.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-card">
+
+                    <span>2025 — presente</span>
+
+                    <img src="santos.jpg" alt="Neymar no Santos" class="timeline-image">
+
+                    <h3>Santos ⚪⚫</h3>
+
+                    <p>
+                        Em 2025, Neymar retornou ao Santos, clube onde
+                        começou sua trajetória profissional e se tornou
+                        conhecido mundialmente.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CLUBES -->
+
+    <section>
+
+        <div class="section-title">
+            <small>CLUBES</small>
+            <h2>Onde Neymar fez história</h2>
+        </div>
+
+        <div class="clubs">
+
+            <div class="club">
+                <div class="club-number">01</div>
+                <h3>Santos</h3>
+                <p>Brasil</p>
+            </div>
+
+            <div class="club">
+                <div class="club-number">02</div>
+                <h3>Barcelona</h3>
+                <p>Espanha</p>
+            </div>
+
+            <div class="club">
+                <div class="club-number">03</div>
+                <h3>PSG</h3>
+                <p>França</p>
+            </div>
+
+            <div class="club">
+                <div class="club-number">04</div>
+                <h3>Al-Hilal</h3>
+                <p>Arábia Saudita</p>
+            </div>
+
+            <div class="club">
+                <div class="club-number">05</div>
+                <h3>Santos</h3>
+                <p>O retorno</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TÍTULOS -->
+
+    <section id="titulos">
+
+        <div class="section-title">
+            <small>CONQUISTAS</small>
+            <h2>Principais títulos</h2>
+            <p>Alguns dos troféus que marcaram sua carreira.</p>
+        </div>
+
+        <div class="trophies">
+
+            <div class="trophy">
+
+                <div class="trophy-icon">🏆</div>
+
+                <h3>Champions League</h3>
+
+                <p>
+                    Campeão com o Barcelona na temporada 2014/15.
+                </p>
+
+            </div>
+
+
+            <div class="trophy">
+
+                <div class="trophy-icon">🥇</div>
+
+                <h3>Ouro Olímpico</h3>
+
+                <p>
+                    Medalha de ouro com a Seleção Brasileira nos Jogos
+                    Olímpicos do Rio de Janeiro em 2016.
+                </p>
+
+            </div>
+
+
+            <div class="trophy">
+
+                <div class="trophy-icon">🇧🇷</div>
+
+                <h3>Copa das Confederações</h3>
+
+                <p>
+                    Campeão com o Brasil em 2013.
+                </p>
+
+            </div>
+
+
+            <div class="trophy">
+
+                <div class="trophy-icon">🏆</div>
+
+                <h3>La Liga</h3>
+
+                <p>
+                    Campeão espanhol com o Barcelona.
+                </p>
+
+            </div>
+
+
+            <div class="trophy">
+
+                <div class="trophy-icon">🏆</div>
+
+                <h3>Ligue 1</h3>
+
+                <p>
+                    Diversos títulos nacionais conquistados com o PSG.
+                </p>
+
+            </div>
+
+
+            <div class="trophy">
+
+                <div class="trophy-icon">⚽</div>
+
+                <h3>Libertadores</h3>
+
+                <p>
+                    Campeão da Copa Libertadores de 2011 pelo Santos.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FRASE -->
+
+    <section class="quote">
+
+        <h2>
+            "Talento pode abrir portas.<br>
+            <span>Trabalho transforma sonhos em história.</span>"
+        </h2>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>Projeto sobre Neymar Jr.</p>
+
+        <p>Feito no VS Code ⚽</p>
+
+    </footer>
+
+
+</body>
+</html>
